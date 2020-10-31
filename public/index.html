@@ -113,17 +113,17 @@
             datasets: [
                 {
                 data: [],
-                backgroundColor: [
-                    '#ffcd56',
+                backgroundColor: [],
+                   /*  '#ffcd56',
                     '#ff6384',
                     '#36a2eb',
                     '#fd6b19',
                     '#20C8A6',
                     '#CBE474',
-                    '#F398F6'
+                    '#F398F6' */
 
 
-                ],
+                
                 }
             ],
             labels: []
@@ -138,13 +138,15 @@
         }
 
         function getBudget() {
+            //axios.get('http://localhost:3000/budget')
             axios.get('http://localhost:3000/budget')
             .then(function (res) {
-                console.log(res.data);
-                for(var i = 0; i < res.data.myBudget.length; i++){
-                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.myBudget[i].title;
-                    
+                //console.log(res.data);
+                for(var i = 0; i < res.data.length; i++){
+                    dataSource.datasets[0].data[i] = res.data[i].title;
+                    dataSource.labels[i] = res.data[i].value;
+                    //dataSource.datasets[i].data[i] = res.data[i].color;
+
             }
             createChart();
         });
@@ -152,5 +154,13 @@
         getBudget();
         
     </script>
+<!--  Week 5 example (Angular theory)
+       <script>
+        function changeTitle(){
+            var h1 = document.getElementById('myH1');
+            h1.innerHTML = "Title CHanged!"
+        }
+
+    </script> -->
 </body>
 </html>
