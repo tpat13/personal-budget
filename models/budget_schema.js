@@ -2,11 +2,7 @@ const mongoose = require ("mongoose");
 
 
 const budgetSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true,
-    }, 
+    
     title: {
         type: String,
         required: true,
@@ -20,7 +16,6 @@ const budgetSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        uppercase: true
     }
 }, { collection: 'pb_collection'});
 

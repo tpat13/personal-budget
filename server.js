@@ -2,17 +2,22 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require ("mongoose");
+const bodyParser = require('body-parser');
 
-const budgetModel = require("./models/budget_schema");
 const app = express();
 const port = 3000;
+const budgetModel = require("./models/budget_schema");
+
 let url = 'mongodb://localhost:27017/personal_budget';
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 //week 5
 app.use(cors());
 
 //week 4
 app.use('/', express.static('public'));
+
 //const budget = require("./categories"); 
 
 
@@ -50,12 +55,11 @@ app.post('/addBudget', (req, res) => {
     mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(()=> {
             //insertMany
-            var budgetData = {
-                id: req.body.id,
+            var budgetData = new budgetModel ({
                 title: req.body.title,
                 value: req.body.value,
                 color: req.body.color
-            };
+            });
             budgetModel.insertMany(budgetData) 
             .then((data)=>{
             res.json(data);
